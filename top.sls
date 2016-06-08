@@ -4,4 +4,5 @@ base:
     - elasticsearch
     - nginx.ng
     - php.ng.fpm
-    - node 
+    - node
+    - mojeskoly-app.deploy
