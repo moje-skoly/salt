@@ -5,4 +5,4 @@ base:
     - nginx.ng
     - php.ng.fpm
     - node
-    - mojeskoly-app.deploy
+    - mojeskoly.deploy
