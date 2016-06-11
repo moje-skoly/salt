@@ -30,3 +30,5 @@ gitfs_remotes:
 ```
 
 Files for salt setup are in `https://github.com/moje-skoly/salt` to be cloned into `/srv/salt`. Pillars are in private repository `https://bitbucket.org/mojeskoly/pillar` to be cloned to `/srv/pillar`. 
+
+Generate private key for root user on the server and add the keys to bitbucket repo as deploy keys (it needs to be private because there are passwords in the files). 
