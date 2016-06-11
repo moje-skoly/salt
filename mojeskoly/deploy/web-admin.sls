@@ -1,23 +1,14 @@
-{% for app in salt['pillar.get']('mojeskoly:apps', []) %}
-deploy-repo-{{ app.name }}:
-  git.latest:
-    - name: {{ app.repo }}
-    - target: /var/www/{{ app.name }}
-    - branch: master
-    - force_fetch: True
-    - force_checkout: True
-    - force_reset: True
-{% endfor %}
-
 web-admin-cache-dir:
   file.directory:
     - user: www-data
     - group: www-data
 
     - name: /var/www/web-admin/app/cache
+    - mode: 777
     - recurse:
       - user
       - group
+      - mode
     - watch:
       - git: deploy-repo-web-admin
 
@@ -26,9 +17,11 @@ web-admin-logs-dir:
     - user: www-data
     - group: www-data
     - name: /var/www/web-admin/app/logs
+    - mode: 777
     - recurse:
       - user
       - group
+      - mode
     - watch:
       - git: deploy-repo-web-admin
 
@@ -36,5 +29,14 @@ web-admin-post-deploy-composer:
   cmd.run:
     - name: SYMFONY_ENV=prod composer install --no-interaction --optimize-autoloader --ignore-platform-reqs
     - cwd: /var/www/web-admin
+    - user: www-data
     - watch:
       - git: deploy-repo-web-admin
+    - require:
+      - file: web-admin-production-config
+
+web-admin-production-config:
+  file.managed:
+    - name: /var/www/web-admin/app/config/config_prod.yml
+    - template: jinja
+    - source: salt://mojeskoly/files/config_prod.yml

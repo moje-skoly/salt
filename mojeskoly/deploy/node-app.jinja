@@ -1,0 +1,42 @@
+{{ appKey }}-npm-install:
+  cmd.run:
+    - name: npm install --group=www-data --owner=www-data
+    - user: www-data
+    - cwd: /var/www/{{ appKey }}
+    - watch:
+      - git: deploy-repo-{{ appKey }}
+    - require:
+      - file: deploy-npm-cache-dir
+
+{{ appKey }}-build:
+  cmd.run:
+    - name: npm run build
+    - user: www-data
+    - cwd: /var/www/{{ appKey }}
+    - watch:
+      - git: deploy-repo-{{ appKey }}
+    - require:
+      - cmd: {{ appKey }}-npm-install
+
+
+{{ appKey }}-forever-start:
+  cmd.run:
+    - name: npm run startServer
+    - unless: test -f /tmp/{{ appKey }}.pid
+    - user: www-data
+    - cwd: /var/www/{{ appKey }}
+    - watch:
+      - git: deploy-repo-{{ appKey }}
+    - require:
+      - cmd: {{ appKey }}-build
+
+{{ appKey }}-forever-restart:
+  cmd.run:
+    - name: npm run restartServer
+    - unless: test ! -f /tmp/{{ appKey }}.pid
+    - user: www-data
+    - cwd: /var/www/{{ appKey }}
+    - watch:
+      - git: deploy-repo-{{ appKey }}
+    - require:
+      - cmd: {{ appKey }}-build

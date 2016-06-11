@@ -27,7 +27,6 @@ gitfs_remotes:
   - https://github.com/moje-skoly/node-formula.git
   - https://github.com/moje-skoly/composer-formula.git
   - https://github.com/moje-skoly/mysql-formula.git
-
 ```
 
 Files for salt setup are in `https://github.com/moje-skoly/salt` to be cloned into `/srv/salt`. Pillars are in private repository `https://bitbucket.org/mojeskoly/pillar` to be cloned to `/srv/pillar`. 
