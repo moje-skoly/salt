@@ -28,7 +28,7 @@
     - watch:
       - git: deploy-repo-{{ appKey }}
     - require:
-      - cmd: {{ appKey }}-build
+{#      - cmd: {{ appKey }}-build #}
       - file: {{ appKey }}-forever-dir
 
 {{ appKey }}-forever-restart:
@@ -40,7 +40,7 @@
     - watch:
       - git: deploy-repo-{{ appKey }}
     - require:
-      - cmd: {{ appKey }}-build
+{#      - cmd: {{ appKey }}-build #}
       - file: {{ appKey }}-forever-dir
 
 {{ appKey }}-forever-dir:
