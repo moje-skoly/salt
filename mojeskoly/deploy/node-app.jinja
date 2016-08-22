@@ -22,7 +22,7 @@
 {{ appKey }}-forever-start:
   cmd.run:
     - name: npm run startServer
-    - unless: "node_modules/.bin/forever list | grep -v server.js"
+    - unless: "node_modules/.bin/forever list | grep server.js"
     - user: www-data
     - cwd: /var/www/{{ appKey }}
     - watch:
@@ -34,7 +34,7 @@
 {{ appKey }}-forever-restart:
   cmd.run:
     - name: npm run restartServer
-    - unless: "node_modules/.bin/forever list | grep server.js"
+    - unless: "node_modules/.bin/forever list | grep -v server.js"
     - user: www-data
     - cwd: /var/www/{{ appKey }}
     - watch:
