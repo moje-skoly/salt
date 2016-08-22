@@ -1,4 +1,4 @@
-{{ appKey }}-npm-install:
+{# {{ appKey }}-npm-install:
   cmd.run:
     - name: npm install --group=www-data --owner=www-data
     - user: www-data
@@ -17,7 +17,7 @@
       - git: deploy-repo-{{ appKey }}
     - require:
       - cmd: {{ appKey }}-npm-install
-
+#}
 
 {{ appKey }}-forever-start:
   cmd.run:
