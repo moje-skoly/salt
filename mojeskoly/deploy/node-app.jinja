@@ -40,3 +40,9 @@
       - git: deploy-repo-{{ appKey }}
     - require:
       - cmd: {{ appKey }}-build
+
+{{ appKey }}-forever-dir:
+  file.directory:
+    - name: /var/www/.forever
+    - user: www-data
+    - group: www-data
