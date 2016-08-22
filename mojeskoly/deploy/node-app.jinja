@@ -34,7 +34,7 @@
 {{ appKey }}-forever-restart:
   cmd.run:
     - name: npm run restartServer
-    - unless: "node_modules/.bin/forever list | grep -v server.js"
+    - onlyif: "node_modules/.bin/forever list | grep server.js"
     - user: www-data
     - cwd: /var/www/{{ appKey }}
     - watch:
