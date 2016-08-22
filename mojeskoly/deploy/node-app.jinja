@@ -29,6 +29,7 @@
       - git: deploy-repo-{{ appKey }}
     - require:
       - cmd: {{ appKey }}-build
+      - file: {{ appKey }}-forever-dir
 
 {{ appKey }}-forever-restart:
   cmd.run:
@@ -40,6 +41,7 @@
       - git: deploy-repo-{{ appKey }}
     - require:
       - cmd: {{ appKey }}-build
+      - file: {{ appKey }}-forever-dir
 
 {{ appKey }}-forever-dir:
   file.directory:
