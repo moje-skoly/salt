@@ -1,6 +1,7 @@
 include:
   - .web-admin
   - .web-app
+  - .web-api
 
 {% for app in salt['pillar.get']('mojeskoly:apps', []) %}
 deploy-repo-{{ app.name }}:
