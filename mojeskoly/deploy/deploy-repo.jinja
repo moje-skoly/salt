@@ -1,6 +1,6 @@
 deploy-repo-{{ appKey }}:
   git.latest:
-    - name: {{ salt['pillar.get']('mojeskoly:apps:' ~ appKey }}
+    - name: {{ salt['pillar.get']('mojeskoly:apps:' ~ appKey) }}
     - target: /var/www/{{ appKey }}
     - branch: master
     - user: www-data
