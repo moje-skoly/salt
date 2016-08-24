@@ -1,18 +1,18 @@
-deploy-repo-{{ app.name }}:
+deploy-repo-{{ appKey }}:
   git.latest:
-    - name: {{ app.repo }}
-    - target: /var/www/{{ app.name }}
+    - name: {{ salt['pillar.get']('mojeskoly:apps:' ~ appKey }}
+    - target: /var/www/{{ appKey }}
     - branch: master
     - user: www-data
     - force_fetch: True
     - force_checkout: True
     - force_reset: True
 
-deploy-dir-{{ app.name }}:
+deploy-dir-{{ appKey }}:
   file.directory:
-    - name: /var/www/{{ app.name }}
+    - name: /var/www/{{ appKey }}
     - user: www-data
     - group: www-data
     - mode: 775
     - require_in:
-      - git: deploy-repo-{{ app.name }}
+      - git: deploy-repo-{{ appKey }}
