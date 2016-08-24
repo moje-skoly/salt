@@ -33,7 +33,7 @@ web-admin-post-deploy-composer:
   cmd.run:
     - name: SYMFONY_ENV=prod composer install --no-interaction --optimize-autoloader --ignore-platform-reqs
     - cwd: /var/www/web-admin
-    - user: www-data
+    - runas: www-data
     - watch:
       - git: deploy-repo-web-admin
     - require:

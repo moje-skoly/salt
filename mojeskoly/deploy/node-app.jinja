@@ -1,7 +1,7 @@
 {# {{ appKey }}-npm-install:
   cmd.run:
     - name: npm install --group=www-data --owner=www-data
-    - user: www-data
+    - runas: www-data
     - cwd: /var/www/{{ appKey }}
     - watch:
       - git: deploy-repo-{{ appKey }}
@@ -11,7 +11,7 @@
 {{ appKey }}-build:
   cmd.run:
     - name: npm run build
-    - user: www-data
+    - runas: www-data
     - cwd: /var/www/{{ appKey }}
     - watch:
       - git: deploy-repo-{{ appKey }}
@@ -23,7 +23,7 @@
   cmd.run:
     - name: npm run startServer
     - unless: "node_modules/.bin/forever list | grep server.js | grep {{ appKey }}"
-    - user: www-data
+    - runas: www-data
     - cwd: /var/www/{{ appKey }}
     - watch:
       - git: deploy-repo-{{ appKey }}
@@ -35,7 +35,7 @@
   cmd.run:
     - name: npm run restartServer
     - onlyif: "node_modules/.bin/forever list | grep server.js | grep {{ appKey }}"
-    - user: www-data
+    - runas: www-data
     - cwd: /var/www/{{ appKey }}
     - watch:
       - git: deploy-repo-{{ appKey }}
@@ -46,5 +46,5 @@
 {{ appKey }}-forever-dir:
   file.directory:
     - name: /var/www/.forever
-    - user: www-data
+    - runas: www-data
     - group: www-data
