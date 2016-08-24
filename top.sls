@@ -1,5 +1,6 @@
 base:
   '*':
+    - common
     - java-oracle.jdk8-webupd8team
     - elasticsearch
     - nginx.ng
