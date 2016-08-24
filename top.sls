@@ -18,3 +18,4 @@ base:
     - mysql.remove_test_database
     - mysql.user
     - mysql.salt-user
+    - users
