@@ -1,23 +1,6 @@
 {% set appKey = 'web-admin' %}
 
-deploy-repo-{{ app.name }}:
-  git.latest:
-    - name: {{ app.repo }}
-    - target: /var/www/{{ app.name }}
-    - branch: master
-    - user: www-data
-    - force_fetch: True
-    - force_checkout: True
-    - force_reset: True
-
-deploy-dir-{{ app.name }}:
-  file.directory:
-    - name: /var/www/{{ app.name }}
-    - user: www-data
-    - group: www-data
-    - mode: 775
-    - require_in:
-      - git: deploy-repo-{{ app.name }}
+{% include "mojeskoly/deploy/deploy-repo.jinja" %}
 
 web-admin-cache-dir:
   file.directory:
