@@ -1,3 +1,9 @@
+{{ appKey }}-deploy-npm-cache-dir:
+  file.directory:
+    - name: /var/www/.npm
+    - user: www-data
+    - group: www-data
+
 {{ appKey }}-npm-install:
   cmd.run:
     - name: npm install --group=www-data --owner=www-data
@@ -6,7 +12,7 @@
     - watch:
       - git: deploy-repo-{{ appKey }}
     - require:
-      - file: deploy-npm-cache-dir
+      - file: {{ appKey }}-deploy-npm-cache-dir
 
 {{ appKey }}-build:
   cmd.run:
