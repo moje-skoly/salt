@@ -1,4 +1,4 @@
-{# {{ appKey }}-npm-install:
+{{ appKey }}-npm-install:
   cmd.run:
     - name: npm install --group=www-data --owner=www-data
     - runas: www-data
@@ -17,7 +17,7 @@
       - git: deploy-repo-{{ appKey }}
     - require:
       - cmd: {{ appKey }}-npm-install
-#}
+
 
 {{ appKey }}-forever-start:
   cmd.run:
@@ -28,7 +28,7 @@
     - watch:
       - git: deploy-repo-{{ appKey }}
     - require:
-{#      - cmd: {{ appKey }}-build #}
+      - cmd: {{ appKey }}-build
       - file: {{ appKey }}-forever-dir
 
 {{ appKey }}-forever-restart:
@@ -40,7 +40,7 @@
     - watch:
       - git: deploy-repo-{{ appKey }}
     - require:
-{#      - cmd: {{ appKey }}-build #}
+      - cmd: {{ appKey }}-build
       - file: {{ appKey }}-forever-dir
 
 {{ appKey }}-forever-dir:
